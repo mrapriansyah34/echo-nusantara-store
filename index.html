@@ -254,7 +254,6 @@
       },
     ];
 
-    // Simulasi database resi (termasuk contoh dari gambar: JY2041308714 dan invoice lokal)
     const defaultShipments = {
       "JY2041308714": {
         invoice: "JY2041308714",
@@ -377,7 +376,6 @@
         return acc + (orig - item.product.price) * item.quantity;
       }, 0);
 
-      // Fungsi Cek Resi ala Cekresi.com (Auto-detect & Fetch Mock/Live API)
       const handleTrackOrder = (e) => {
         e.preventDefault();
         const key = trackQuery.trim();
@@ -387,7 +385,6 @@
           setTrackedResult(shipments[key]);
           setTrackError("");
         } else {
-          // Buat data dinamis jika nomor resi belum ada di database lokal
           const dynamicResult = {
             invoice: key,
             courierName: key.startsWith("J") ? "J&T Express" : key.startsWith("P") ? "Paxel" : "JNE Express",
@@ -1047,8 +1044,10 @@ Mohon info nomor rekening pembayaran dan konfirmasi pengirimannya. Terima kasih!
       );
     }
 
-    const root = ReactDOM.createRoot(document.getElementById("root"));
-    root.render(<App />);
+    const root = ReactDOM.createRoot(defaultShipments || document.getElementById("root"));
+    const container = document.getElementById("root");
+    const rootInstance = ReactDOM.createRoot(container);
+    rootInstance.render(<App />);
   </script>
 </body>
 </html>
