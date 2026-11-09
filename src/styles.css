@@ -1,0 +1,309 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+  ECHO Nusantara — editorial luxury palette. Warm paper, ink, a single gold
+  accent and a muted sage for the pandan line. Type pairs a light serif
+  display with a small, wide-tracked sans for labels.
+*/
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Cormorant Garamond', 'Times New Roman', Georgia, serif;
+
+  --color-paper: #f4eee3;
+  --color-cream: #faf6ef;
+  --color-paper-2: #ece3d4;
+  --color-ink: #191511;
+  --color-ink-soft: #3b342a;
+  --color-muted: #6d6353;
+  --color-hair: #ded2bf;
+  --color-hair-strong: #c9b89c;
+  --color-gold: #a37f3c;
+  --color-gold-soft: #d9c09a;
+  --color-sage: #6d7a5e;
+  --color-clay: #ad5330;
+  --color-espresso: #201a13;
+  --color-espresso-soft: #2c241a;
+
+  --animate-marquee: marquee 46s linear infinite;
+  --animate-float: float 9s ease-in-out infinite;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    border-color: var(--color-hair);
+  }
+
+  html {
+    background-color: var(--color-paper);
+    color-scheme: light;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+  ::selection {
+    background: rgb(163 127 60 / 0.22);
+    color: var(--color-ink);
+  }
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+  }
+  :focus-visible {
+    outline: 1px solid var(--color-gold);
+    outline-offset: 3px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* Wide-tracked uppercase label used above every section title. */
+@utility eyebrow {
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+@utility title-light {
+  font-family: var(--font-display);
+  font-weight: 300;
+  letter-spacing: -0.015em;
+  line-height: 0.95;
+}
+
+/* A hairline that fades at both ends. */
+@utility rule-fade {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--color-hair-strong), transparent);
+}
+
+/* Paper grain, very subtle. */
+@utility grain {
+  opacity: 0.32;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.16'/></svg>");
+}
+
+.marquee-mask {
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+}
+
+/*
+  Crossed-out anchor price. The line draws itself as the card scrolls into
+  view where scroll-driven animations are supported; elsewhere it is static.
+*/
+.price-strike {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+.price-strike::after {
+  content: '';
+  position: absolute;
+  left: -2px;
+  right: -2px;
+  top: 53%;
+  height: 1.5px;
+  background: currentColor;
+  transform: scaleX(1);
+  transform-origin: left center;
+  opacity: 0.85;
+}
+
+@keyframes price-strike-in {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@supports (animation-timeline: view()) {
+  .price-strike::after {
+    animation: price-strike-in linear both;
+    animation-timeline: view();
+    animation-range: entry 5% cover 30%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .price-strike::after {
+    animation: none;
+    transform: scaleX(1);
+  }
+}
+
+/* Theme switch: the new snapshot is clipped to a circle growing out of the
+   toggle button, so the palette change reads as a deliberate wipe. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-new(root) {
+  z-index: 1;
+}
+
+/* Language switch: the page copy fades back in without moving the layout. */
+@keyframes locale-in {
+  from {
+    opacity: 0.25;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+html.locale-swap main,
+html.locale-swap footer {
+  animation: locale-in 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Product photo settles in whenever the selected variant changes. */
+@keyframes photo-in {
+  from {
+    opacity: 0.55;
+    transform: scale(1.045);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.photo-in {
+  animation: photo-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Swiftlets crossing the hero: a slow glide with a distance wing flap. */
+@keyframes bird-fly {
+  0% {
+    transform: translate3d(-18vw, 7vh, 0) rotate(-6deg) scale(0.86);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.55;
+  }
+  50% {
+    transform: translate3d(42vw, -5vh, 0) rotate(3deg) scale(1);
+  }
+  85% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate3d(114vw, 12vh, 0) rotate(-4deg) scale(0.9);
+    opacity: 0;
+  }
+}
+@keyframes bird-flap {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  45% {
+    transform: scaleY(0.55);
+  }
+  70% {
+    transform: scaleY(0.9);
+  }
+}
+
+/* Nav links draw a hairline from the left on hover. */
+.nav-link {
+  position: relative;
+  display: inline-block;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  bottom: -6px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+/*
+  Dark theme. Utilities resolve their colours from these variables, so flipping
+  the palette here re-themes every section without touching the components.
+*/
+/*
+  A warm charcoal rather than black: large dark fields stay comfortable for
+  long reading, and surfaces step up gently instead of punching out.
+*/
+.dark {
+  --color-paper: #1d1913;
+  --color-cream: #262119;
+  --color-paper-2: #302a20;
+  --color-ink: #f2e9db;
+  --color-ink-soft: #ddd1bf;
+  --color-muted: #b0a38e;
+  --color-hair: #3f372a;
+  --color-hair-strong: #584b3b;
+  --color-gold: #d5b078;
+  --color-gold-soft: #9a7c4d;
+  --color-sage: #a8b897;
+  --color-clay: #dc9370;
+  --color-espresso: #f2e9db;
+  --color-espresso-soft: #ddd1bf;
+  color-scheme: dark;
+}
+
+.dark ::selection {
+  background: rgb(208 169 103 / 0.28);
+  color: var(--color-ink);
+}
+
+.dark .grain {
+  opacity: 0.12;
+  mix-blend-mode: screen;
+}
+
+/*
+  Sections that stay dark in both themes (announcement bar, reviews band).
+  Scoping the tokens keeps the inner text/background pairing intact.
+*/
+.band-dark {
+  --color-espresso: #201a13;
+  --color-cream: #f4eee3;
+  --color-gold-soft: #d9c09a;
+}
