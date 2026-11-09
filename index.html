@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#f4eee3" />
+    <script>
+      // Set the theme before first paint so a stored dark preference never flashes.
+      try {
+        var stored = localStorage.getItem('echo-theme')
+        var dark = stored ? stored === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches
+        if (dark) document.documentElement.classList.add('dark')
+        document.documentElement.style.colorScheme = dark ? 'dark' : 'light'
+        document.documentElement.lang = localStorage.getItem('echo-locale') === 'id' ? 'id' : 'en'
+      } catch (error) {}
+    </script>
+    <title>ECHO Nusantara — Premium Edible Bird's Nest</title>
+    <meta
+      name="description"
+      content="Pure AAA edible bird's nest from the Indonesian archipelago. Ready to drink and dry, preservative-free. Order directly via WhatsApp, shipped across Indonesia."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

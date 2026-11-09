@@ -1,0 +1,26 @@
+
+> saas-landing@0.1.0 dev
+> vite
+
+
+  [32m[1mVITE[22m v8.3.6[39m  [2mready in [0m[1m2379[22m[2m[0m ms[22m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m5173[22m/[39m
+[2m  [32m➜[39m  [1mNetwork[22m[2m: use [22m[1m--host[22m[2m to expose[22m
+  [32m➜[39m  [1mDebug[22m:   [2m[33mhttp://localhost:[1m5173[22m[2m/__debug[39m[22m
+[2m8:36:47 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/lib/theme.tsx, /src/styles.css[22m
+[2m8:36:47 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/lib/theme.tsx[22m Could not Fast Refresh ("useTheme" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m8:36:47 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/components/Preferences.tsx[22m
+[2m8:36:48 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/Preferences.tsx, /src/styles.css[22m
+[2m8:36:49 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/lib/i18n.tsx, /src/styles.css[22m
+[2m8:36:49 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/lib/i18n.tsx[22m Could not Fast Refresh ("localizeProduct" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m8:36:49 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/sections/Ritual.tsx, /src/sections/Benefits.tsx, /src/sections/CartDrawer.tsx, /src/sections/Footer.tsx, /src/sections/Collection.tsx, /src/sections/Faq.tsx, /src/sections/Testimonials.tsx, /src/sections/Nav.tsx, /src/sections/Cta.tsx, /src/sections/Hero.tsx, /src/lib/store.tsx, /src/sections/Brew.tsx, /src/sections/Story.tsx, /src/components/Preferences.tsx[22m
+[2m8:36:49 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/lib/store.tsx[22m Could not Fast Refresh ("useStore" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m8:36:49 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.tsx, /src/sections/CartDrawer.tsx, /src/sections/Collection.tsx, /src/sections/Nav.tsx[22m
+[2m8:37:14 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css[22m
+[2m8:37:15 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/sections/Nav.tsx, /src/styles.css[22m
+[2m8:37:28 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/sections/Hero.tsx, /src/styles.css[22m
+[2m8:44:27 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles.css[22m
+[2m8:44:29 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/sections/Hero.tsx, /src/styles.css[22m
+[2m8:44:29 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/ProductPlate.tsx, /src/styles.css[22m
+[2m8:45:38 PM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/FlyingSwallows.tsx, /src/styles.css[22m
